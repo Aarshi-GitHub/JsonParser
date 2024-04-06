@@ -1,0 +1,20 @@
+<div class="success-box" *ngIf="parsedSuccesfully">
+    <p class="success-msg" >data succesfully parsed!</p>
+</div>
+
+
+<form [formGroup]="parserForm" (ngSubmit)="jsonOnSubmit()">
+   
+    <div class="parser-container">
+        <p class="text-desc">JSON parser</p>
+        <div class="parser-text-area">
+            <textarea class="json-editor" formControlName="jsonData" rows="10" cols="50"[class.text-error]="parserForm.get('jsonData')?.touched && parserForm.get('jsonData')?.invalid"></textarea>
+            <p *ngIf="parserForm.get('jsonData')?.touched && parserForm.get('jsonData')?.invalid" class="invalid-field-error">Please enter valid json data.</p>
+            
+        </div>
+        <div class="parser-button">
+            <button class="button-continue" (click)="beautifyJson()" type="button" [disabled]="parserForm.invalid">Beautify</button>
+            <button class="button-continue" (ngSubmit)="jsonOnSubmit()" type="submit" [disabled]="parserForm.invalid">Submit</button>
+        </div>
+    </div>
+</form>
